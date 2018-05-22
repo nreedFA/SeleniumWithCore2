@@ -23,17 +23,17 @@ namespace SeleniumWithCore2
         [TestCleanup]
         public void TestCleanup()
         {
-            this.driver.Close();
+            this.driver.Quit();
         }
 
         [TestMethod]
-        public void FailingTest()
+        public void FailingTestDueToUrlMismatch()
         {
             driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
             driver.FindElement(By.Name("UserName")).SendKeys("admin");
             driver.FindElement(By.Name("Password")).SendKeys("admin");
             driver.FindElement(By.Name("Login")).Submit();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(drv => drv.Url.Equals("http://executeautomation.com/demosite/index.html?UserName=admin&Password=adminNOT"));            
         }
 
@@ -44,7 +44,7 @@ namespace SeleniumWithCore2
             driver.FindElement(By.Name("UserName")).SendKeys("admin");
             driver.FindElement(By.Name("Password")).SendKeys("admin");
             driver.FindElement(By.Name("Login")).Submit();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(drv => drv.Url.Equals("http://executeautomation.com/demosite/index.html?UserName=admin&Password=admin"));
         }
 
